@@ -6,8 +6,8 @@ export function getSketchSlugs() {
 }
 
 export async function loadSketch(slug) {
-  const mod = await modules[`./sketches/${slug}/index.js`]();
+  const moduleExports = await modules[`./sketches/${slug}/index.js`]();
   const cssPath = `./sketches/${slug}/style.css`;
   const css = styles[cssPath] ? await styles[cssPath]() : '';
-  return { sketch: mod.default, css };
+  return { moduleExports, css };
 }
